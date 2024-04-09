@@ -1,3 +1,4 @@
+"use server"
 import { NextResponse } from "next/server";
 import { WelcomeEmail } from "@/emails/email";
 import { Resend } from "resend";
