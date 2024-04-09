@@ -25,9 +25,14 @@ function FormPage() {
 
     await fetch('/api/email', {
       method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         firstName: formData.name,
         email: formData.email,
+        number: formData.number
       })
     })
 
