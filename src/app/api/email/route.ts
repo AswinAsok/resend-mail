@@ -3,7 +3,7 @@ import { WelcomeEmail } from "@/emails/email";
 import { Resend } from "resend";
 import { google } from "googleapis";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 const SHEET_NAME = 'Sheet1';
 
 export async function POST(request: Request) {
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
 
   try {
 
+    console.log("part-1")
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL,
@@ -32,8 +33,9 @@ export async function POST(request: Request) {
       ],
     });
 
+    console.log("part-2")
     const sheets = google.sheets({ version: "v4", auth });
-
+    console.log("part-3")
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID,
       range: `${SHEET_NAME}!A1:C1`,
@@ -42,6 +44,7 @@ export async function POST(request: Request) {
         values: [[firstName, email, number]],
       },
     });
+    console.log("part-4")
 
     return NextResponse.json({ status: "Email sent" });
   } catch (e) {
