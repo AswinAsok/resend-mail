@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.NEXT_PUBLIC_GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
       },
       scopes: [
         "https://www.googleapis.com/auth/drive",
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       range: `${SHEET_NAME}!A1:C1`,
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[firstName, email, number]],
+        values: [[firstName, email, number]], 
       },
     });
     console.log("part-4")
